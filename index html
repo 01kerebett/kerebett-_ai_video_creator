@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kerebett AI Video Creator</title>
+<style>
+body{margin:0;font-family:Arial;background:#10121b;color:white}
+header{text-align:center;padding:25px;background:#191d2b}
+main{max-width:600px;margin:auto;padding:16px}
+.card{background:#1c2030;padding:18px;border-radius:14px;margin:16px 0}
+textarea,input,select{box-sizing:border-box;width:100%;padding:12px;margin:8px 0;background:#10121b;color:white;border:1px solid #555;border-radius:8px}
+textarea{min-height:100px}
+button{width:100%;padding:14px;margin-top:10px;background:#795cff;color:white;border:0;border-radius:9px;font-size:16px}
+img,video{width:100%;margin-top:12px}
+</style>
+</head>
+<body>
+<header>
+<h1>🎬 Kerebett AI</h1>
+<p>Create videos from text and photos</p>
+</header>
+<main>
+<div class="card">
+<h2>Text to Video</h2>
+<textarea id="prompt" placeholder="Describe your video..."></textarea>
+<button onclick="generateText()">Generate Video</button>
+</div>
+<div class="card">
+<h2>Photo to Video</h2>
+<input id="photo" type="file" accept="image/*">
+<textarea id="motion" placeholder="Describe the movement..."></textarea>
+<button onclick="generatePhoto()">Animate Photo</button>
+<img id="preview" hidden alt="Photo preview">
+</div>
+<div class="card">
+<h2>Status</h2>
+<p id="status">Welcome! Your video studio is ready.</p>
+</div>
+</main>
+<script>
+function generateText(){
+ const p=document.getElementById('prompt').value.trim();
+ document.getElementById('status').textContent=p?
+ 'Your prompt is ready. A real AI video engine must be connected to generate a video.':
+ 'Please describe your video first.';
+}
+function generatePhoto(){
+ const f=document.getElementById('photo').files[0];
+ const m=document.getElementById('motion').value.trim();
+ if(!f){document.getElementById('status').textContent='Please select a photo.';return;}
+ if(!m){document.getElementById('status').textContent='Please describe the movement.';return;}
+ document.getElementById('preview').src=URL.createObjectURL(f);
+ document.getElementById('preview').hidden=false;
+ document.getElementById('status').textContent='Photo loaded! An AI video engine is still needed to animate it.';
+}
+</script>
+</body>
+</html>
